@@ -6,6 +6,14 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 	version="2.1">
 	<persistence-unit name="exemplo-jpa"
 		transaction-type="RESOURCE_LOCAL">
+		<class>com.cursomc.domain.Categoria</class>
+		<class>com.cursomc.domain.Cidade</class>
+		<class>com.cursomc.domain.Cliente</class>
+		<class>com.cursomc.domain.Endereco</class>
+		<class>com.cursomc.domain.Estado</class>
+		<class>com.cursomc.domain.Pagamento</class>
+		<class>com.cursomc.domain.Pedido</class>
+		<class>com.cursomc.domain.Produto</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />
