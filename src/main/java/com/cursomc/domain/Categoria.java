@@ -1,6 +1,7 @@
 package com.cursomc.domain;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,29 +12,22 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name="categoria")
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//Atributos
-	
+		
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;	
 	private String nome;
 	
-	//Amarração das tabelas
-	@JsonManagedReference
+	
 	@ManyToMany(mappedBy="categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	
-	//Construtor
 	
 	public Categoria() {
-		
 	}
 
 	public Categoria(Integer id, String nome) {
@@ -42,8 +36,7 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 	
-	//Getters e Setters
-	
+		
 	public Integer getId() {
 		return id;
 	}
@@ -68,7 +61,6 @@ public class Categoria implements Serializable {
 		this.produtos = produtos;
 	}
 	
-	//HashCode
 	
 	@Override
 	public int hashCode() {
