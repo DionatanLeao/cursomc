@@ -31,16 +31,19 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
+	//BuscaUmaListaDeTodosClientes
 	public List<Cliente> findAll() {
 		return repo.findAll();
 	}
 	
+	//BuscarClientePorId
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
 	
+	//InserirUmCliente
 	@Transactional
 	public Cliente insert(Cliente obj) {
 		obj.setId(null);
@@ -49,26 +52,30 @@ public class ClienteService {
 		return obj;
 	}
 	
+	//AtualizarUmCliente
 	public Cliente update(Cliente obj) {
 		Cliente newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);	
 	}
 	
+	//DeletarUmCliente
 	public void delete(Integer id) {
 		find(id);
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível excluir porque há Pedidos relacionadas");
+			throw new DataIntegrityException("Não é possível excluir porque há Pedidos relacionados");
 		}
 	}
 	
+	//TrazOsClientesPorPaginas
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 		
 	}
+	
 	public Cliente fromDTO(ClienteDTO objDto) {
 		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null,null);
 	}

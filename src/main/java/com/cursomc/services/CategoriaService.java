@@ -22,27 +22,32 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
+	//BuscaUmaListaDeTodasCategorias
 	public List<Categoria> findAll() {
 		return repo.findAll();
 	}
 	
+	//BuscarCategoriaPorId
 	public Categoria find(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));		
 	}	
 	
+	//InserirUmaCategoria
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
 	
+	//AtualizarUmaCategoria
 	public Categoria update(Categoria obj) {
 		Categoria newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);	
 	}
 	
+	//DeletarUmaCategoria
 	public void delete(Integer id) {
 		find(id);
 		try {
@@ -53,6 +58,7 @@ public class CategoriaService {
 		}
 	}
 	
+	//TrazOsClientesPorPaginas
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
