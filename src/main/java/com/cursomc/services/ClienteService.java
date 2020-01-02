@@ -69,7 +69,7 @@ public class ClienteService {
 		}
 	}
 	
-	//TrazOsClientesPorPaginas
+	//BuscaPaginada
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
