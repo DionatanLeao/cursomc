@@ -41,11 +41,11 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	private String senha;
 
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy= "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE")
+	@CollectionTable(name= "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -55,8 +55,6 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
-	
-	private String imgUrl;
 	
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);
@@ -153,14 +151,7 @@ public class Cliente implements Serializable {
 		this.pedidos = pedidos;
 	}
 	
-	public String getImgUrl() {
-		return imgUrl;
-	}
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
